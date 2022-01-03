@@ -5,37 +5,43 @@ import { nanoid } from 'nanoid'
 
 function App() {
 
-  const [diceValues, setDiceValues] = useState(allNewDice());
+	const [diceValues, setDiceValues] = useState(allNewDice());
 
-  function allNewDice() {
-    const newDiceValues = []
-    for(let i = 0; i < 10; i++) {
-      newDiceValues.push( {
-        value: Math.ceil( Math.random() * 6 ), 
-        isHeld: false,
-        key: nanoid()
-      })
-    }
-    return newDiceValues;
-  }
+	function allNewDice() {
+		const newDiceValues = []
+		for(let i = 0; i < 10; i++) {
+			newDiceValues.push( {
+				value: Math.ceil( Math.random() * 6 ), 
+				isHeld: false,
+				key: nanoid()
+			})
+		}
+		return newDiceValues;
+	}
 
-  const diceElements = diceValues.map( diceElement => <Dice value={diceElement.value} key={diceElement.key} isHeld={diceElement.isHeld} /> );
+	function holdDice(id) {
+		console.log(id)
+	}
 
-  function rollDice() {
-    setDiceValues( () => allNewDice() );
-  }
+	const diceElements = diceValues.map( diceElement => <Dice value={diceElement.value} key={diceElement.key} isHeld={diceElement.isHeld} id={diceElement.key} hold={holdDice} /> );
 
-  return (
-    <main className="App">
-      <div className="die-container">
-        {diceElements}
-      </div>
+	function rollDice() {
+		setDiceValues( () => allNewDice() );
+	}
 
-      <button className="btn-roll" onClick={rollDice}>
-        Roll
-      </button>
-    </main>
-  );
+	
+
+	return (
+		<main className="App">
+			<div className="die-container">
+				{diceElements}
+			</div>
+
+			<button className="btn-roll" onClick={rollDice}>
+				Roll
+			</button>
+		</main>
+	);
 }
 
 export default App;
