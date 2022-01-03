@@ -1,24 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import Dice from './components/Dice';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="App">
+      <div className="die-container">
+        <Dice value="2"/>
+        <Dice value="4"/>
+        <Dice value="6"/>
+        <Dice value="3"/>
+        <Dice value="1"/>
+        <Dice value="5"/>
+        <Dice value="2"/>
+        <Dice value="4"/>
+        <Dice value="5"/>
+        <Dice value="2"/>
+      </div>
+    </main>
   );
 }
 
