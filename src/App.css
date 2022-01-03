@@ -16,7 +16,7 @@ main {
   border-radius: 10px;
   padding: 30px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-direction: column;
 }
 
@@ -38,4 +38,23 @@ main {
   font-family: Karla;
   font-weight: 700;
   font-size: 1.5rem;
+}
+
+.btn-roll {
+  background: #5035FF;
+  box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  border: 0;
+  width: 95px;
+  margin: 0 auto;
+  padding: 10px 5px;
+  color: #fff;
+  font-family: Karla;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.btn-roll:active {
+  box-shadow: inset 1px 1px 7px -3px rgb(0 0 0 / 70%)
 }
