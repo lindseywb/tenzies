@@ -13,23 +13,23 @@ function App() {
 			newDiceValues.push( {
 				value: Math.ceil( Math.random() * 6 ), 
 				isHeld: false,
-				key: nanoid()
+				id: nanoid()
 			})
 		}
 		return newDiceValues;
 	}
 
 	function holdDice(id) {
-		console.log(id)
+		setDiceValues( prevValues => prevValues.map(die => {
+			return die.id === id ? { ...die, isHeld: ! die.isHeld } : die
+		}))
 	}
 
-	const diceElements = diceValues.map( diceElement => <Dice value={diceElement.value} key={diceElement.key} isHeld={diceElement.isHeld} id={diceElement.key} hold={holdDice} /> );
+	const diceElements = diceValues.map( diceElement => <Dice value={diceElement.value} key={diceElement.id} isHeld={diceElement.isHeld} id={diceElement.id} hold={holdDice} /> );
 
 	function rollDice() {
 		setDiceValues( () => allNewDice() );
 	}
-
-	
 
 	return (
 		<main className="App">
