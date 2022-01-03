@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import Dice from './components/Dice';
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
+import Confetti from 'react-confetti';
 
 function App() {
 
@@ -59,8 +60,10 @@ function App() {
 			</div>
 
 			<button className="btn-roll" onClick={rollDice}>
-				Roll
+				{ tenzies ? 'New Game' : 'Roll Dice'}
 			</button>
+
+			{tenzies && <Confetti /> }
 		</main>
 	);
 }
