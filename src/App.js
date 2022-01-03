@@ -1,11 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Dice from './components/Dice';
 import { nanoid } from 'nanoid'
 
 function App() {
 
-	const [diceValues, setDiceValues] = useState(allNewDice());
+	const [dice, setDiceValues] = useState(allNewDice());
+	const [tenzies, setTenzies] = useState(false);
+
+	useEffect(() => {
+        const allHeld = dice.every(die => die.isHeld)
+        const firstValue = dice[0].value
+        const allSameValue = dice.every(die => die.value === firstValue)
+        if (allHeld && allSameValue) {
+            setTenzies(true)
+            console.log("You won!")
+        }
+    }, [dice])
 
 	function allNewDice() {
 		const newDiceValues = []
@@ -19,14 +30,6 @@ function App() {
 		return newDiceValues;
 	}
 
-	function holdDice(id) {
-		setDiceValues( prevValues => prevValues.map(die => {
-			return die.id === id ? { ...die, isHeld: ! die.isHeld } : die
-		}))
-	}
-
-	const diceElements = diceValues.map( diceElement => <Dice value={diceElement.value} key={diceElement.id} isHeld={diceElement.isHeld} id={diceElement.id} hold={holdDice} /> );
-
 	function rollDice() {
 		setDiceValues( prevDice => prevDice.map(die => {
 			return ! die.isHeld ? { 
@@ -36,6 +39,14 @@ function App() {
 			} : die
 		}));
 	}
+
+	function holdDice(id) {
+		setDiceValues( prevValues => prevValues.map(die => {
+			return die.id === id ? { ...die, isHeld: ! die.isHeld } : die
+		}))
+	}
+
+	const diceElements = dice.map( diceElement => <Dice value={diceElement.value} key={diceElement.id} isHeld={diceElement.isHeld} id={diceElement.id} hold={holdDice} /> );
 
 	return (
 		<main className="App">
