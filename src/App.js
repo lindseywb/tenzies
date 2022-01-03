@@ -28,11 +28,21 @@ function App() {
 	const diceElements = diceValues.map( diceElement => <Dice value={diceElement.value} key={diceElement.id} isHeld={diceElement.isHeld} id={diceElement.id} hold={holdDice} /> );
 
 	function rollDice() {
-		setDiceValues( () => allNewDice() );
+		setDiceValues( prevDice => prevDice.map(die => {
+			return ! die.isHeld ? { 
+				value: Math.ceil( Math.random() * 6 ),
+				isHeld: false,
+				id: nanoid()
+			} : die
+		}));
 	}
 
 	return (
 		<main className="App">
+			<header>
+				<h1 className="title">Tenzies</h1>
+				<p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+			</header>
 			<div className="die-container">
 				{diceElements}
 			</div>
